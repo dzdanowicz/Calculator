@@ -1,4 +1,4 @@
-import "./keyboard.css";
+import "./Keyboard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPercent,

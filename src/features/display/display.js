@@ -1,4 +1,4 @@
-import "./display.css";
+import "./Display.css";
 
 function Display() {
   return (

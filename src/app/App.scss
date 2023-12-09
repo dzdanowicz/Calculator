@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.App {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+  .wrapper {
+    display: flex;
+    max-width: 620px;
+    width: 100%;
+    height: fit-content;
+    flex-direction: column;
+    background-color: #0c2340;
+  }
+}

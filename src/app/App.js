@@ -1,12 +1,14 @@
 import "./App.css";
-import Display from "../features/display/display.js";
-import Keyboard from "../features/keyboard/keyboard.js";
+import Display from "../features/Display/Display.js";
+import Keyboard from "../features/Keyboard/Keyboard.js";
 
 function App() {
   return (
     <div className="App">
-      <Display />
-      <Keyboard />
+      <div className="wrapper">
+        <Display />
+        <Keyboard />
+      </div>
     </div>
   );
 }
