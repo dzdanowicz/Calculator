@@ -17,37 +17,61 @@ function Keyboard() {
       <div className="btn">
         <FontAwesomeIcon icon={faPercent} />
       </div>
-      <div className="btn">CE</div>
+      <div className="btn" id="clear">
+        CE
+      </div>
       <div className="btn">
         <FontAwesomeIcon icon={faDeleteLeft} />
       </div>
-      <div className="btn">
+      <div className="btn" id="divide">
         <FontAwesomeIcon icon={faDivide} />
       </div>
-      <div className="btn">7</div>
-      <div className="btn">8</div>
-      <div className="btn">9</div>
-      <div className="btn">
+      <div className="btn" id="seven">
+        7
+      </div>
+      <div className="btn" id="eight">
+        8
+      </div>
+      <div className="btn" id="nine">
+        9
+      </div>
+      <div className="btn" id="multiply">
         <FontAwesomeIcon icon={faXmark} />
       </div>
-      <div className="btn">4</div>
-      <div className="btn">5</div>
-      <div className="btn">6</div>
-      <div className="btn">
+      <div className="btn" id="four">
+        4
+      </div>
+      <div className="btn" id="five">
+        5
+      </div>
+      <div className="btn" id="six">
+        6
+      </div>
+      <div className="btn" id="subtract">
         <FontAwesomeIcon icon={faMinus} />
       </div>
-      <div className="btn">1</div>
-      <div className="btn">2</div>
-      <div className="btn">3</div>
-      <div className="btn">
+      <div className="btn" id="one">
+        1
+      </div>
+      <div className="btn" id="two">
+        2
+      </div>
+      <div className="btn" id="three">
+        3
+      </div>
+      <div className="btn" id="add">
         <FontAwesomeIcon icon={faPlus} />
       </div>
       <div className="btn">
         <FontAwesomeIcon icon={faPlusMinus} />
       </div>
-      <div className="btn">0</div>
-      <div className="btn">.</div>
-      <div className="btn">
+      <div className="btn" id="zero">
+        0
+      </div>
+      <div className="btn" id="decimal">
+        .
+      </div>
+      <div className="btn" id="equals">
         <FontAwesomeIcon icon={faEquals} />
       </div>
     </div>
