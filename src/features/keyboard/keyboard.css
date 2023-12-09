@@ -8,10 +8,20 @@
 }
 .keyboard-container .btn {
   width: 100%;
-  height: 50px;
-  line-height: 50px;
+  height: 70px;
+  line-height: 70px;
   text-align: center;
   color: white;
+  font-size: 18px;
   background-color: #36454f;
   border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.keyboard-container .btn:hover {
+  filter: contrast(1.2);
+}
+.keyboard-container .btn:active {
+  filter: contrast(1.4);
 }/*# sourceMappingURL=keyboard.css.map */
