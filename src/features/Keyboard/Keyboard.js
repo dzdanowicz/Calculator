@@ -10,8 +10,12 @@ import {
   faPlusMinus,
   faEquals,
 } from "@fortawesome/free-solid-svg-icons";
+import { useStore } from "react-redux";
+import { NUM_INPUT } from "../actionTypes";
 
 function Keyboard() {
+  const store = useStore();
+
   return (
     <div className="keyboard-container">
       <div className="btn">
