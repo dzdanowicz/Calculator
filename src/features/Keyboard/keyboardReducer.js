@@ -1,5 +1,5 @@
 import initialState from "../../initialState";
-import { NUM_INPUT } from "../actionTypes";
+import { CLEAR_INPUT, NUM_INPUT } from "../actionTypes";
 
 const keyboardReducer = (state = initialState, action) => {
   const newState = { ...state };
@@ -12,6 +12,9 @@ const keyboardReducer = (state = initialState, action) => {
       newState.displayPrimary += action.value;
       console.log(newState);
       return newState;
+
+    case CLEAR_INPUT:
+      return initialState;
 
     default:
       return state;

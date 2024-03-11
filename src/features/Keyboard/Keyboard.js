@@ -11,15 +11,22 @@ import {
   faEquals,
 } from "@fortawesome/free-solid-svg-icons";
 import { useStore } from "react-redux";
-import { NUM_INPUT } from "../actionTypes";
-import { clickNumber } from "../actions";
+import { CLEAR_INPUT, NUM_INPUT } from "../actionTypes";
+import { clickClear, clickNumber } from "../actions";
 import { useDispatch } from "react-redux";
 
 function Keyboard() {
   const dispatchEvent = useDispatch();
 
   function dispatch(dispatchType, dispatchValue) {
-    dispatchEvent(clickNumber(dispatchType, dispatchValue));
+    switch (dispatchType) {
+      case NUM_INPUT:
+        dispatchEvent(clickNumber(dispatchValue));
+        break;
+      case CLEAR_INPUT:
+        dispatchEvent(clickClear());
+        break;
+    }
   }
 
   return (
@@ -27,7 +34,11 @@ function Keyboard() {
       <div className="btn">
         <FontAwesomeIcon icon={faPercent} />
       </div>
-      <div className="btn" id="clear">
+      <div
+        className="btn"
+        id="clear"
+        onClick={() => dispatch(CLEAR_INPUT, null)}
+      >
         CE
       </div>
       <div className="btn">
@@ -75,7 +86,7 @@ function Keyboard() {
       <div className="btn">
         <FontAwesomeIcon icon={faPlusMinus} />
       </div>
-      <div className="btn" id="zero">
+      <div className="btn" id="zero" onClick={() => dispatch(NUM_INPUT, "0")}>
         0
       </div>
       <div className="btn" id="decimal">
