@@ -12,9 +12,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useStore } from "react-redux";
 import { NUM_INPUT } from "../actionTypes";
+import { clickNumber } from "../actions";
+import { useDispatch } from "react-redux";
 
 function Keyboard() {
-  const store = useStore();
+  const dispatchEvent = useDispatch();
+
+  function dispatch(dispatchType, dispatchValue) {
+    dispatchEvent(clickNumber(dispatchType, dispatchValue));
+  }
 
   return (
     <div className="keyboard-container">
@@ -30,37 +36,37 @@ function Keyboard() {
       <div className="btn" id="divide">
         <FontAwesomeIcon icon={faDivide} />
       </div>
-      <div className="btn" id="seven">
+      <div className="btn" id="seven" onClick={() => dispatch(NUM_INPUT, "7")}>
         7
       </div>
-      <div className="btn" id="eight">
+      <div className="btn" id="eight" onClick={() => dispatch(NUM_INPUT, "8")}>
         8
       </div>
-      <div className="btn" id="nine">
+      <div className="btn" id="nine" onClick={() => dispatch(NUM_INPUT, "9")}>
         9
       </div>
       <div className="btn" id="multiply">
         <FontAwesomeIcon icon={faXmark} />
       </div>
-      <div className="btn" id="four">
+      <div className="btn" id="four" onClick={() => dispatch(NUM_INPUT, "4")}>
         4
       </div>
-      <div className="btn" id="five">
+      <div className="btn" id="five" onClick={() => dispatch(NUM_INPUT, "5")}>
         5
       </div>
-      <div className="btn" id="six">
+      <div className="btn" id="six" onClick={() => dispatch(NUM_INPUT, "6")}>
         6
       </div>
       <div className="btn" id="subtract">
         <FontAwesomeIcon icon={faMinus} />
       </div>
-      <div className="btn" id="one">
+      <div className="btn" id="one" onClick={() => dispatch(NUM_INPUT, "1")}>
         1
       </div>
-      <div className="btn" id="two">
+      <div className="btn" id="two" onClick={() => dispatch(NUM_INPUT, "2")}>
         2
       </div>
-      <div className="btn" id="three">
+      <div className="btn" id="three" onClick={() => dispatch(NUM_INPUT, "3")}>
         3
       </div>
       <div className="btn" id="add">

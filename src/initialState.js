@@ -1,6 +1,6 @@
 const initialState = {
-  displayPrimary: 0,
-  displaySecondary: 0,
+  displayPrimary: "0",
+  displaySecondary: "",
 };
 
 export default initialState;
