@@ -10,7 +10,6 @@ const keyboardReducer = (state = initialState, action) => {
         newState.displayPrimary = "";
       }
       newState.displayPrimary += action.value;
-      console.log(newState);
       return newState;
 
     case CLEAR_INPUT:

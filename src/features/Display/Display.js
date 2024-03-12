@@ -7,7 +7,7 @@ function Display() {
   );
   return (
     <div className="Display" id="display">
-      <div className="result">{displayValue}</div>
+      <div className="result">{Number(displayValue).toLocaleString()}</div>
     </div>
   );
 }
