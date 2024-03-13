@@ -5,9 +5,12 @@ function Display() {
   const displayValue = useSelector(
     (state) => state.keyboardReducer.displayPrimary
   );
+
+  const formatedNumber = new Intl.NumberFormat().format(displayValue);
+
   return (
     <div className="Display" id="display">
-      <div className="result">{Number(displayValue).toLocaleString()}</div>
+      <div className="result">{formatedNumber}</div>
     </div>
   );
 }

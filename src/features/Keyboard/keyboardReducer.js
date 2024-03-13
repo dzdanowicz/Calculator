@@ -9,7 +9,12 @@ const keyboardReducer = (state = initialState, action) => {
       if (newState.displayPrimary === "0") {
         newState.displayPrimary = "";
       }
+      if (newState.displayPrimary.length === 16) {
+        return newState;
+      }
+
       newState.displayPrimary += action.value;
+      console.log(newState);
       return newState;
 
     case CLEAR_INPUT:
