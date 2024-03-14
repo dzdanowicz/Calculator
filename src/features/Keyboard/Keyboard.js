@@ -11,8 +11,8 @@ import {
   faEquals,
 } from "@fortawesome/free-solid-svg-icons";
 import { useStore } from "react-redux";
-import { CLEAR_INPUT, NUM_INPUT } from "../actionTypes";
-import { clickClear, clickNumber } from "../actions";
+import { CLR_INPUT, DEL_INPUT, NUM_INPUT } from "../actionTypes";
+import { clickClear, clickDel, clickNumber } from "../actions";
 import { useDispatch } from "react-redux";
 
 function Keyboard() {
@@ -23,9 +23,11 @@ function Keyboard() {
       case NUM_INPUT:
         dispatchEvent(clickNumber(dispatchValue));
         break;
-      case CLEAR_INPUT:
+      case CLR_INPUT:
         dispatchEvent(clickClear());
         break;
+      case DEL_INPUT:
+        dispatchEvent(clickDel());
     }
   }
 
@@ -34,14 +36,10 @@ function Keyboard() {
       <div className="btn">
         <FontAwesomeIcon icon={faPercent} />
       </div>
-      <div
-        className="btn"
-        id="clear"
-        onClick={() => dispatch(CLEAR_INPUT, null)}
-      >
+      <div className="btn" id="clear" onClick={() => dispatch(CLR_INPUT)}>
         CE
       </div>
-      <div className="btn">
+      <div className="btn" onClick={() => dispatch(DEL_INPUT)}>
         <FontAwesomeIcon icon={faDeleteLeft} />
       </div>
       <div className="btn" id="divide">

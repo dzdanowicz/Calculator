@@ -1,5 +1,5 @@
 import initialState from "../../initialState";
-import { CLEAR_INPUT, NUM_INPUT } from "../actionTypes";
+import { CLR_INPUT, DEL_INPUT, NUM_INPUT } from "../actionTypes";
 
 const keyboardReducer = (state = initialState, action) => {
   const newState = { ...state };
@@ -17,8 +17,16 @@ const keyboardReducer = (state = initialState, action) => {
       console.log(newState);
       return newState;
 
-    case CLEAR_INPUT:
+    case CLR_INPUT:
       return initialState;
+
+    case DEL_INPUT:
+      let slicedString = newState.displayPrimary.slice(
+        0,
+        newState.displayPrimary.length - 1
+      );
+      newState.displayPrimary = slicedString;
+      return newState;
 
     default:
       return state;

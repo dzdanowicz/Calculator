@@ -1,4 +1,4 @@
-import { CLEAR_INPUT, NUM_INPUT } from "./actionTypes";
+import { CLR_INPUT, DEL_INPUT, NUM_INPUT } from "./actionTypes";
 
 export const clickNumber = (eventValue) => {
   return {
@@ -7,8 +7,14 @@ export const clickNumber = (eventValue) => {
   };
 };
 
-export const clickClear = (eventValue) => {
+export const clickClear = () => {
   return {
-    type: CLEAR_INPUT,
+    type: CLR_INPUT,
+  };
+};
+
+export const clickDel = () => {
+  return {
+    type: DEL_INPUT,
   };
 };
