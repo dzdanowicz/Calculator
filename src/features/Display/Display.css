@@ -1,9 +1,18 @@
 .Display {
   padding: 20px 15px;
 }
-.Display .result {
+.Display .displayPrimary {
   color: white;
   font-size: 38px;
   font-weight: bold;
   text-align: right;
-}/*# sourceMappingURL=display.css.map */
+}
+.Display .displaySecondary {
+  text-align: right;
+  margin: 4px 5px 8px;
+  color: darkgray;
+  visibility: hidden;
+}
+.Display .visible {
+  visibility: visible;
+}/*# sourceMappingURL=Display.css.map */

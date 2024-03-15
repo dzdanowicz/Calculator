@@ -1,5 +1,5 @@
 import initialState from "../../initialState";
-import { CLR_INPUT, DEL_INPUT, NUM_INPUT } from "../actionTypes";
+import { CLR_INPUT, DEL_INPUT, NUM_INPUT, OPS_INPUT } from "../actionTypes";
 
 const keyboardReducer = (state = initialState, action) => {
   const newState = { ...state };
@@ -26,6 +26,15 @@ const keyboardReducer = (state = initialState, action) => {
         newState.displayPrimary.length - 1
       );
       newState.displayPrimary = slicedString;
+      return newState;
+
+    case OPS_INPUT:
+      switch (action.value) {
+        case "addition":
+          newState.operation = action.value;
+          newState.displaySecondary = newState.displayPrimary + " +";
+      }
+      newState.displaySecVisibility = true;
       return newState;
 
     default:

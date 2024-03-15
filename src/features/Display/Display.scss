@@ -1,10 +1,21 @@
 .Display {
   padding: 20px 15px;
 
-  .result {
+  .displayPrimary {
     color: white;
     font-size: 38px;
     font-weight: bold;
     text-align: right;
+  }
+
+  .displaySecondary {
+    text-align: right;
+    margin: 4px 5px 8px;
+    color: darkgray;
+    visibility: hidden;
+  }
+
+  .visible {
+    visibility: visible;
   }
 }
