@@ -1,4 +1,10 @@
-import { CLR_INPUT, DEL_INPUT, NUM_INPUT, OPS_INPUT } from "./actionTypes";
+import {
+  CLR_INPUT,
+  DEL_INPUT,
+  EQL_INPUT,
+  NUM_INPUT,
+  OPS_INPUT,
+} from "./actionTypes";
 
 export const clickNumber = (eventValue) => {
   return {
@@ -23,5 +29,11 @@ export const clickOps = (eventValue) => {
   return {
     type: OPS_INPUT,
     value: eventValue,
+  };
+};
+
+export const clickEql = () => {
+  return {
+    type: EQL_INPUT,
   };
 };

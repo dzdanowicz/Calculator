@@ -11,8 +11,20 @@ import {
   faEquals,
 } from "@fortawesome/free-solid-svg-icons";
 import { useStore } from "react-redux";
-import { CLR_INPUT, DEL_INPUT, NUM_INPUT, OPS_INPUT } from "../actionTypes";
-import { clickClear, clickDel, clickNumber, clickOps } from "../actions";
+import {
+  CLR_INPUT,
+  DEL_INPUT,
+  EQL_INPUT,
+  NUM_INPUT,
+  OPS_INPUT,
+} from "../actionTypes";
+import {
+  clickClear,
+  clickDel,
+  clickEql,
+  clickNumber,
+  clickOps,
+} from "../actions";
 import { useDispatch } from "react-redux";
 
 function Keyboard() {
@@ -31,6 +43,9 @@ function Keyboard() {
         break;
       case OPS_INPUT:
         dispatchEvent(clickOps("addition"));
+        break;
+      case EQL_INPUT:
+        dispatchEvent(clickEql());
     }
   }
 
@@ -97,7 +112,7 @@ function Keyboard() {
       <div className="btn" id="decimal">
         .
       </div>
-      <div className="btn" id="equals">
+      <div className="btn" id="equals" onClick={() => dispatch(EQL_INPUT)}>
         <FontAwesomeIcon icon={faEquals} />
       </div>
     </div>
