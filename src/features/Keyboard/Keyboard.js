@@ -72,7 +72,11 @@ function Keyboard() {
       <div className="btn" id="nine" onClick={() => dispatch(NUM_INPUT, "9")}>
         9
       </div>
-      <div className="btn" id="multiply">
+      <div
+        className="btn"
+        id="multiply"
+        onClick={() => dispatch(OPS_INPUT, "multiply")}
+      >
         <FontAwesomeIcon icon={faXmark} />
       </div>
       <div className="btn" id="four" onClick={() => dispatch(NUM_INPUT, "4")}>
