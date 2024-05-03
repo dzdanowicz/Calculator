@@ -42,7 +42,7 @@ function Keyboard() {
         dispatchEvent(clickDel());
         break;
       case OPS_INPUT:
-        dispatchEvent(clickOps("addition"));
+        dispatchEvent(clickOps(dispatchValue));
         break;
       case EQL_INPUT:
         dispatchEvent(clickEql());
@@ -84,7 +84,11 @@ function Keyboard() {
       <div className="btn" id="six" onClick={() => dispatch(NUM_INPUT, "6")}>
         6
       </div>
-      <div className="btn" id="subtract">
+      <div
+        className="btn"
+        id="subtract"
+        onClick={() => dispatch(OPS_INPUT, "subtraction")}
+      >
         <FontAwesomeIcon icon={faMinus} />
       </div>
       <div className="btn" id="one" onClick={() => dispatch(NUM_INPUT, "1")}>

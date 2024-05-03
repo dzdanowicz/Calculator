@@ -46,10 +46,14 @@ const keyboardReducer = (state = initialState, action) => {
       return newState;
 
     case OPS_INPUT:
+      newState.operation = action.value;
       switch (action.value) {
         case "addition":
-          newState.operation = action.value;
           newState.displaySecondary = newState.displayPrimary + " +";
+          break;
+        case "subtraction":
+          newState.displaySecondary = newState.displayPrimary + " -";
+          break;
       }
       newState.displaySecVisibility = true;
       newState.emptyDisplayPrim = true;
@@ -76,6 +80,20 @@ const keyboardReducer = (state = initialState, action) => {
 
           newState.displayPrimary =
             Number(newState.displayPrimary) + Number(dispSecNum);
+          newState.isResultExecuted = true;
+          return newState;
+
+        case "subtraction":
+          if (newState.isResultExecuted) {
+            newState.displaySecondary =
+              newState.displayPrimary + " - " + newState.secondNum + " =";
+            newState.displayPrimary =
+              Number(newState.displayPrimary) - Number(newState.secondNum);
+            return newState;
+          }
+
+          newState.displayPrimary =
+            Number(dispSecNum) - Number(newState.displayPrimary);
           newState.isResultExecuted = true;
           return newState;
 
