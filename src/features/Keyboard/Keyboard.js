@@ -117,7 +117,11 @@ function Keyboard() {
       <div className="btn" id="zero" onClick={() => dispatch(NUM_INPUT, "0")}>
         0
       </div>
-      <div className="btn" id="decimal">
+      <div
+        className="btn"
+        id="decimal"
+        onClick={() => dispatch(NUM_INPUT, ".")}
+      >
         .
       </div>
       <div className="btn" id="equals" onClick={() => dispatch(EQL_INPUT)}>

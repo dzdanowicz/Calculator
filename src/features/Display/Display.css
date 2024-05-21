@@ -13,6 +13,12 @@
   color: darkgray;
   visibility: hidden;
 }
+.Display .displayNone {
+  display: none;
+}
+.Display .displayInline {
+  display: inline;
+}
 .Display .visible {
   visibility: visible;
 }/*# sourceMappingURL=Display.css.map */

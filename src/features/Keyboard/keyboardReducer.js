@@ -9,11 +9,17 @@ import {
 
 const keyboardReducer = (state = initialState, action) => {
   const newState = { ...state };
-
   switch (action.type) {
     case NUM_INPUT:
+      newState.showDecimal = false;
       if (newState.displayPrimary === "0" || newState.emptyDisplayPrim) {
         newState.displayPrimary = "";
+        if (action.value === ".") {
+          newState.displayPrimary = "0.";
+          newState.showDecimal = true;
+          newState.emptyDisplayPrim = false;
+          return newState;
+        }
       }
       if (newState.displayPrimary.length === 16) {
         return newState;
@@ -21,10 +27,23 @@ const keyboardReducer = (state = initialState, action) => {
       if (newState.isResultExecuted) {
         return initialState;
       }
+      if (action.value === ".") {
+        if (newState.displayPrimary.includes(".")) {
+          if (newState.displayPrimary === "0.") {
+            newState.showDecimal = true;
+          }
+          return newState;
+        }
+        newState.showDecimal = true;
+        newState.displayPrimary += ".";
+        return newState;
+      }
 
+      if (action.value === "0" && newState.displayPrimary.includes(".")) {
+        newState.showDecimal = true;
+      }
       newState.displayPrimary += action.value;
       newState.emptyDisplayPrim = false;
-      console.log(newState);
       return newState;
 
     case CLR_INPUT:
@@ -38,6 +57,12 @@ const keyboardReducer = (state = initialState, action) => {
         newState.isResultExecuted = false;
         return newState;
       }
+      if (/[.]0/g.test(newState.displayPrimary)) {
+        newState.showDecimal = true;
+      }
+      if (newState.displayPrimary.slice(-1) === ".") {
+        newState.showDecimal = false;
+      }
       let slicedString = newState.displayPrimary.slice(
         0,
         newState.displayPrimary.length - 1
@@ -47,9 +72,18 @@ const keyboardReducer = (state = initialState, action) => {
 
     case OPS_INPUT:
       newState.operation = action.value;
+      newState.showDecimal = false;
 
       if (newState.isResultExecuted) {
         newState.isResultExecuted = false;
+      }
+
+      let primLength = newState.displayPrimary.length;
+      if (newState.displayPrimary.slice(primLength - 1) === ".") {
+        newState.displayPrimary = newState.displayPrimary.slice(
+          0,
+          primLength - 1
+        );
       }
 
       switch (action.value) {
@@ -67,7 +101,7 @@ const keyboardReducer = (state = initialState, action) => {
       return newState;
 
     case EQL_INPUT:
-      let getNumberRegex = /\d*/g;
+      let getNumberRegex = /^[+-]?(?:\d*\.)?\d+/g;
       let dispSecNum = getNumberRegex.exec(newState.displaySecondary)[0];
       if (!newState.isResultExecuted) {
         newState.displaySecondary += " " + newState.displayPrimary + " =";
@@ -82,11 +116,13 @@ const keyboardReducer = (state = initialState, action) => {
               newState.displayPrimary + " + " + newState.secondNum + " =";
             newState.displayPrimary =
               Number(newState.displayPrimary) + Number(newState.secondNum);
+            newState.displayPrimary = newState.displayPrimary.toString();
             return newState;
           }
 
           newState.displayPrimary =
             Number(newState.displayPrimary) + Number(dispSecNum);
+          newState.displayPrimary = newState.displayPrimary.toString();
           newState.isResultExecuted = true;
           return newState;
 
@@ -96,11 +132,13 @@ const keyboardReducer = (state = initialState, action) => {
               newState.displayPrimary + " - " + newState.secondNum + " =";
             newState.displayPrimary =
               Number(newState.displayPrimary) - Number(newState.secondNum);
+            newState.displayPrimary = newState.displayPrimary.toString();
             return newState;
           }
 
           newState.displayPrimary =
             Number(dispSecNum) - Number(newState.displayPrimary);
+          newState.displayPrimary = newState.displayPrimary.toString();
           newState.isResultExecuted = true;
           return newState;
 
@@ -110,11 +148,13 @@ const keyboardReducer = (state = initialState, action) => {
               newState.displayPrimary + " x " + newState.secondNum + " =";
             newState.displayPrimary =
               Number(newState.displayPrimary) * Number(newState.secondNum);
+            newState.displayPrimary = newState.displayPrimary.toString();
             return newState;
           }
 
           newState.displayPrimary =
             Number(dispSecNum) * Number(newState.displayPrimary);
+          newState.displayPrimary = newState.displayPrimary.toString();
           newState.isResultExecuted = true;
           return newState;
 

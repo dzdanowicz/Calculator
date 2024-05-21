@@ -2,11 +2,12 @@ const initialState = {
   displayPrimary: "0",
   displaySecondary: "0",
   operation: "",
+  firstNum: 0,
+  secondNum: 0,
   displaySecVisibility: false,
   emptyDisplayPrim: false,
   isResultExecuted: false,
-  firstNum: 0,
-  secondNum: 0,
+  showDecimal: false,
 };
 
 export default initialState;
