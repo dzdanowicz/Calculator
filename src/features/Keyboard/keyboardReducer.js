@@ -68,6 +68,10 @@ const keyboardReducer = (state = initialState, action) => {
         newState.displayPrimary.length - 1
       );
       newState.displayPrimary = slicedString;
+
+      if (newState.displayPrimary === "") {
+        newState.displayPrimary = "0";
+      }
       return newState;
 
     case OPS_INPUT:
@@ -166,15 +170,27 @@ const keyboardReducer = (state = initialState, action) => {
           if (newState.isResultExecuted) {
             newState.displaySecondary =
               newState.displayPrimary +
+              " " +
               String.fromCharCode(247) +
+              " " +
               newState.secondNum +
               " =";
+
+            if (newState.secondNum === "0") {
+              newState.displayPrimary = "0";
+              return newState;
+            }
             newState.displayPrimary =
               Number(newState.displayPrimary) / Number(newState.secondNum);
             newState.displayPrimary = newState.displayPrimary.toString();
             return newState;
           }
 
+          if (newState.secondNum === "0") {
+            newState.displayPrimary = "0";
+            newState.isResultExecuted = true;
+            return newState;
+          }
           newState.displayPrimary =
             Number(dispSecNum) / Number(newState.displayPrimary);
           newState.displayPrimary = newState.displayPrimary.toString();
