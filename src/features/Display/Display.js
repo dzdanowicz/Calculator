@@ -35,7 +35,6 @@ function Display() {
       trailingZeros += "0";
     }
   }
-  console.log(trailingZeros);
 
   const formatedNumber = new Intl.NumberFormat(undefined, {
     maximumFractionDigits: 16,

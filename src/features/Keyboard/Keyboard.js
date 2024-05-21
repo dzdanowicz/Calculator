@@ -46,6 +46,9 @@ function Keyboard() {
         break;
       case EQL_INPUT:
         dispatchEvent(clickEql());
+        break;
+      default:
+        break;
     }
   }
 
@@ -60,7 +63,11 @@ function Keyboard() {
       <div className="btn" onClick={() => dispatch(DEL_INPUT)}>
         <FontAwesomeIcon icon={faDeleteLeft} />
       </div>
-      <div className="btn" id="divide">
+      <div
+        className="btn"
+        id="divide"
+        onClick={() => dispatch(OPS_INPUT, "divide")}
+      >
         <FontAwesomeIcon icon={faDivide} />
       </div>
       <div className="btn" id="seven" onClick={() => dispatch(NUM_INPUT, "7")}>

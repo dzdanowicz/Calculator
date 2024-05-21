@@ -95,6 +95,10 @@ const keyboardReducer = (state = initialState, action) => {
           break;
         case "multiply":
           newState.displaySecondary = newState.displayPrimary + " x";
+          break;
+        case "divide":
+          newState.displaySecondary =
+            newState.displayPrimary + " " + String.fromCharCode(247);
       }
       newState.displaySecVisibility = true;
       newState.emptyDisplayPrim = true;
@@ -154,6 +158,25 @@ const keyboardReducer = (state = initialState, action) => {
 
           newState.displayPrimary =
             Number(dispSecNum) * Number(newState.displayPrimary);
+          newState.displayPrimary = newState.displayPrimary.toString();
+          newState.isResultExecuted = true;
+          return newState;
+
+        case "divide":
+          if (newState.isResultExecuted) {
+            newState.displaySecondary =
+              newState.displayPrimary +
+              String.fromCharCode(247) +
+              newState.secondNum +
+              " =";
+            newState.displayPrimary =
+              Number(newState.displayPrimary) / Number(newState.secondNum);
+            newState.displayPrimary = newState.displayPrimary.toString();
+            return newState;
+          }
+
+          newState.displayPrimary =
+            Number(dispSecNum) / Number(newState.displayPrimary);
           newState.displayPrimary = newState.displayPrimary.toString();
           newState.isResultExecuted = true;
           return newState;
