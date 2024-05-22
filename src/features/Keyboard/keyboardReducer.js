@@ -6,6 +6,7 @@ import {
   NUM_INPUT,
   OPS_INPUT,
 } from "../actionTypes";
+import operation from "./operation";
 
 const keyboardReducer = (state = initialState, action) => {
   const newState = { ...state };
@@ -119,83 +120,16 @@ const keyboardReducer = (state = initialState, action) => {
 
       switch (newState.operation) {
         case "addition":
-          if (newState.isResultExecuted) {
-            newState.displaySecondary =
-              newState.displayPrimary + " + " + newState.secondNum + " =";
-            newState.displayPrimary =
-              Number(newState.displayPrimary) + Number(newState.secondNum);
-            newState.displayPrimary = newState.displayPrimary.toString();
-            return newState;
-          }
-
-          newState.displayPrimary =
-            Number(newState.displayPrimary) + Number(dispSecNum);
-          newState.displayPrimary = newState.displayPrimary.toString();
-          newState.isResultExecuted = true;
-          return newState;
+          return operation(newState, "+", dispSecNum);
 
         case "subtraction":
-          if (newState.isResultExecuted) {
-            newState.displaySecondary =
-              newState.displayPrimary + " - " + newState.secondNum + " =";
-            newState.displayPrimary =
-              Number(newState.displayPrimary) - Number(newState.secondNum);
-            newState.displayPrimary = newState.displayPrimary.toString();
-            return newState;
-          }
-
-          newState.displayPrimary =
-            Number(dispSecNum) - Number(newState.displayPrimary);
-          newState.displayPrimary = newState.displayPrimary.toString();
-          newState.isResultExecuted = true;
-          return newState;
+          return operation(newState, "-", dispSecNum);
 
         case "multiply":
-          if (newState.isResultExecuted) {
-            newState.displaySecondary =
-              newState.displayPrimary + " x " + newState.secondNum + " =";
-            newState.displayPrimary =
-              Number(newState.displayPrimary) * Number(newState.secondNum);
-            newState.displayPrimary = newState.displayPrimary.toString();
-            return newState;
-          }
-
-          newState.displayPrimary =
-            Number(dispSecNum) * Number(newState.displayPrimary);
-          newState.displayPrimary = newState.displayPrimary.toString();
-          newState.isResultExecuted = true;
-          return newState;
+          return operation(newState, "x", dispSecNum);
 
         case "divide":
-          if (newState.isResultExecuted) {
-            newState.displaySecondary =
-              newState.displayPrimary +
-              " " +
-              String.fromCharCode(247) +
-              " " +
-              newState.secondNum +
-              " =";
-
-            if (newState.secondNum === "0") {
-              newState.displayPrimary = "0";
-              return newState;
-            }
-            newState.displayPrimary =
-              Number(newState.displayPrimary) / Number(newState.secondNum);
-            newState.displayPrimary = newState.displayPrimary.toString();
-            return newState;
-          }
-
-          if (newState.secondNum === "0") {
-            newState.displayPrimary = "0";
-            newState.isResultExecuted = true;
-            return newState;
-          }
-          newState.displayPrimary =
-            Number(dispSecNum) / Number(newState.displayPrimary);
-          newState.displayPrimary = newState.displayPrimary.toString();
-          newState.isResultExecuted = true;
-          return newState;
+          return operation(newState, "/", dispSecNum);
 
         default:
           break;
