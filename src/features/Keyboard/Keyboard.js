@@ -11,8 +11,20 @@ import {
   faEquals,
 } from "@fortawesome/free-solid-svg-icons";
 import { useStore } from "react-redux";
-import { CLR_INPUT, DEL_INPUT, NUM_INPUT } from "../actionTypes";
-import { clickClear, clickDel, clickNumber } from "../actions";
+import {
+  CLR_INPUT,
+  DEL_INPUT,
+  EQL_INPUT,
+  NUM_INPUT,
+  OPS_INPUT,
+} from "../actionTypes";
+import {
+  clickClear,
+  clickDel,
+  clickEql,
+  clickNumber,
+  clickOps,
+} from "../actions";
 import { useDispatch } from "react-redux";
 
 function Keyboard() {
@@ -28,6 +40,15 @@ function Keyboard() {
         break;
       case DEL_INPUT:
         dispatchEvent(clickDel());
+        break;
+      case OPS_INPUT:
+        dispatchEvent(clickOps(dispatchValue));
+        break;
+      case EQL_INPUT:
+        dispatchEvent(clickEql());
+        break;
+      default:
+        break;
     }
   }
 
@@ -42,7 +63,11 @@ function Keyboard() {
       <div className="btn" onClick={() => dispatch(DEL_INPUT)}>
         <FontAwesomeIcon icon={faDeleteLeft} />
       </div>
-      <div className="btn" id="divide">
+      <div
+        className="btn"
+        id="divide"
+        onClick={() => dispatch(OPS_INPUT, "divide")}
+      >
         <FontAwesomeIcon icon={faDivide} />
       </div>
       <div className="btn" id="seven" onClick={() => dispatch(NUM_INPUT, "7")}>
@@ -54,7 +79,11 @@ function Keyboard() {
       <div className="btn" id="nine" onClick={() => dispatch(NUM_INPUT, "9")}>
         9
       </div>
-      <div className="btn" id="multiply">
+      <div
+        className="btn"
+        id="multiply"
+        onClick={() => dispatch(OPS_INPUT, "multiply")}
+      >
         <FontAwesomeIcon icon={faXmark} />
       </div>
       <div className="btn" id="four" onClick={() => dispatch(NUM_INPUT, "4")}>
@@ -66,7 +95,11 @@ function Keyboard() {
       <div className="btn" id="six" onClick={() => dispatch(NUM_INPUT, "6")}>
         6
       </div>
-      <div className="btn" id="subtract">
+      <div
+        className="btn"
+        id="subtract"
+        onClick={() => dispatch(OPS_INPUT, "subtraction")}
+      >
         <FontAwesomeIcon icon={faMinus} />
       </div>
       <div className="btn" id="one" onClick={() => dispatch(NUM_INPUT, "1")}>
@@ -78,7 +111,11 @@ function Keyboard() {
       <div className="btn" id="three" onClick={() => dispatch(NUM_INPUT, "3")}>
         3
       </div>
-      <div className="btn" id="add">
+      <div
+        className="btn"
+        id="add"
+        onClick={() => dispatch(OPS_INPUT, "addition")}
+      >
         <FontAwesomeIcon icon={faPlus} />
       </div>
       <div className="btn">
@@ -87,10 +124,14 @@ function Keyboard() {
       <div className="btn" id="zero" onClick={() => dispatch(NUM_INPUT, "0")}>
         0
       </div>
-      <div className="btn" id="decimal">
+      <div
+        className="btn"
+        id="decimal"
+        onClick={() => dispatch(NUM_INPUT, ".")}
+      >
         .
       </div>
-      <div className="btn" id="equals">
+      <div className="btn" id="equals" onClick={() => dispatch(EQL_INPUT)}>
         <FontAwesomeIcon icon={faEquals} />
       </div>
     </div>
