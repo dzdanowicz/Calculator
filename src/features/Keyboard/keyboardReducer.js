@@ -6,7 +6,7 @@ import {
   NUM_INPUT,
   OPS_INPUT,
 } from "../actionTypes";
-import operation from "./operation";
+import operation from "./operations";
 
 const keyboardReducer = (state = initialState, action) => {
   const newState = { ...state };
