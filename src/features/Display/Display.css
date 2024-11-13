@@ -21,4 +21,7 @@
 }
 .Display .visible {
   visibility: visible;
+}
+.Display .smallerFont {
+  font-size: 26px;
 }/*# sourceMappingURL=Display.css.map */

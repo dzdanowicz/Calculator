@@ -5,6 +5,7 @@ import {
   EQL_INPUT,
   NUM_INPUT,
   OPS_INPUT,
+  PCT_INPUT,
 } from "../actionTypes";
 import operation from "./operations";
 
@@ -98,10 +99,10 @@ const keyboardReducer = (state = initialState, action) => {
         case "subtraction":
           newState.displaySecondary = newState.displayPrimary + " -";
           break;
-        case "multiply":
+        case "multiplication":
           newState.displaySecondary = newState.displayPrimary + " x";
           break;
-        case "divide":
+        case "division":
           newState.displaySecondary =
             newState.displayPrimary + " " + String.fromCharCode(247);
       }
@@ -113,9 +114,15 @@ const keyboardReducer = (state = initialState, action) => {
       let getNumberRegex = /^[+-]?(?:\d*\.)?\d+/g;
       let dispSecNum = getNumberRegex.exec(newState.displaySecondary)[0];
       if (!newState.isResultExecuted) {
-        newState.displaySecondary += " " + newState.displayPrimary + " =";
         newState.firstNum = dispSecNum;
         newState.secondNum = newState.displayPrimary;
+
+        if (newState.isPercentExecuted) {
+          newState.displaySecondary += " =";
+          newState.isPercentExecuted = false;
+        } else {
+          newState.displaySecondary += " " + newState.displayPrimary + " =";
+        }
       }
 
       switch (newState.operation) {
@@ -125,12 +132,50 @@ const keyboardReducer = (state = initialState, action) => {
         case "subtraction":
           return operation(newState, "-", dispSecNum);
 
-        case "multiply":
+        case "multiplication":
           return operation(newState, "x", dispSecNum);
 
-        case "divide":
+        case "division":
           return operation(newState, "/", dispSecNum);
 
+        default:
+          break;
+      }
+
+    case PCT_INPUT:
+      if (
+        newState.displayPrimary != "0" &&
+        newState.displaySecVisibility === false
+      ) {
+        newState.displayPrimary = "0";
+        newState.displaySecondary = "0";
+        newState.displaySecVisibility = true;
+        return newState;
+      }
+
+      let regex = /^[+-]?(?:\d*\.)?\d+/g;
+      let firstNum = regex.exec(newState.displaySecondary)[0];
+      let num = newState.displayPrimary / 100;
+      let pct = firstNum * num;
+      newState.displayPrimary = pct.toString();
+      newState.isPercentExecuted = true;
+
+      switch (newState.operation) {
+        case "addition":
+          newState.displaySecondary = firstNum + " + " + pct;
+          return newState;
+
+        case "subtraction":
+          newState.displaySecondary = firstNum + " - " + pct;
+          return newState;
+
+        case "multiplication":
+          newState.displaySecondary = firstNum + " * " + pct;
+          return newState;
+
+        case "division":
+          newState.displaySecondary = firstNum + " / " + pct;
+          return newState;
         default:
           break;
       }

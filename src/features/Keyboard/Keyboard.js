@@ -17,6 +17,7 @@ import {
   EQL_INPUT,
   NUM_INPUT,
   OPS_INPUT,
+  PCT_INPUT,
 } from "../actionTypes";
 import {
   clickClear,
@@ -24,6 +25,7 @@ import {
   clickEql,
   clickNumber,
   clickOps,
+  clickPct,
 } from "../actions";
 import { useDispatch } from "react-redux";
 
@@ -44,6 +46,9 @@ function Keyboard() {
       case OPS_INPUT:
         dispatchEvent(clickOps(dispatchValue));
         break;
+      case PCT_INPUT:
+        dispatchEvent(clickPct());
+        break;
       case EQL_INPUT:
         dispatchEvent(clickEql());
         break;
@@ -54,7 +59,7 @@ function Keyboard() {
 
   return (
     <div className="keyboard-container">
-      <div className="btn">
+      <div className="btn" onClick={() => dispatch(PCT_INPUT)}>
         <FontAwesomeIcon icon={faPercent} />
       </div>
       <div className="btn" id="clear" onClick={() => dispatch(CLR_INPUT)}>
@@ -65,8 +70,8 @@ function Keyboard() {
       </div>
       <div
         className="btn"
-        id="divide"
-        onClick={() => dispatch(OPS_INPUT, "divide")}
+        id="division"
+        onClick={() => dispatch(OPS_INPUT, "division")}
       >
         <FontAwesomeIcon icon={faDivide} />
       </div>
@@ -81,8 +86,8 @@ function Keyboard() {
       </div>
       <div
         className="btn"
-        id="multiply"
-        onClick={() => dispatch(OPS_INPUT, "multiply")}
+        id="multiplication"
+        onClick={() => dispatch(OPS_INPUT, "multiplication")}
       >
         <FontAwesomeIcon icon={faXmark} />
       </div>

@@ -7,6 +7,7 @@ const initialState = {
   displaySecVisibility: false,
   emptyDisplayPrim: false,
   isResultExecuted: false,
+  isPercentExecuted: false,
   showDecimal: false,
 };
 
