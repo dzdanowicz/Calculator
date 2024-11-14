@@ -13,10 +13,10 @@ function Display() {
   );
 
   let displaySecClass = "displaySecondary";
-  const displaySecVisibility = useSelector(
-    (state) => state.keyboardReducer.displaySecVisibility
+  const showDisplaySec = useSelector(
+    (state) => state.keyboardReducer.showDisplaySec
   );
-  if (displaySecVisibility) {
+  if (showDisplaySec) {
     displaySecClass += " visible";
   }
 
@@ -44,7 +44,7 @@ function Display() {
     minimumIntegerDigits: 1,
   }).format(displayPrimVal);
 
-  if (displayPrimVal.length <= 16 && !displayPrimVal.includes("e")) {
+  if (displayPrimVal.length <= 18 && !displayPrimVal.includes("e")) {
     displayPrimary = formattedDisplayPrim;
   } else {
     displayPrimary = Number(displayPrimVal).toExponential();

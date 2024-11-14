@@ -63,15 +63,15 @@ function Keyboard() {
         <FontAwesomeIcon icon={faPercent} />
       </div>
       <div className="btn" id="clear" onClick={() => dispatch(CLR_INPUT)}>
-        CE
+        C
       </div>
       <div className="btn" onClick={() => dispatch(DEL_INPUT)}>
         <FontAwesomeIcon icon={faDeleteLeft} />
       </div>
       <div
         className="btn"
-        id="division"
-        onClick={() => dispatch(OPS_INPUT, "division")}
+        id="divide"
+        onClick={() => dispatch(OPS_INPUT, "divide")}
       >
         <FontAwesomeIcon icon={faDivide} />
       </div>
@@ -86,8 +86,8 @@ function Keyboard() {
       </div>
       <div
         className="btn"
-        id="multiplication"
-        onClick={() => dispatch(OPS_INPUT, "multiplication")}
+        id="multiply"
+        onClick={() => dispatch(OPS_INPUT, "multiply")}
       >
         <FontAwesomeIcon icon={faXmark} />
       </div>
@@ -103,7 +103,7 @@ function Keyboard() {
       <div
         className="btn"
         id="subtract"
-        onClick={() => dispatch(OPS_INPUT, "subtraction")}
+        onClick={() => dispatch(OPS_INPUT, "subtract")}
       >
         <FontAwesomeIcon icon={faMinus} />
       </div>
@@ -116,11 +116,7 @@ function Keyboard() {
       <div className="btn" id="three" onClick={() => dispatch(NUM_INPUT, "3")}>
         3
       </div>
-      <div
-        className="btn"
-        id="add"
-        onClick={() => dispatch(OPS_INPUT, "addition")}
-      >
+      <div className="btn" id="add" onClick={() => dispatch(OPS_INPUT, "add")}>
         <FontAwesomeIcon icon={faPlus} />
       </div>
       <div className="btn">

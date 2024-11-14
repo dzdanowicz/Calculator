@@ -31,7 +31,10 @@ const keyboardReducer = (state = initialState, action) => {
       }
       if (action.value === ".") {
         if (newState.displayPrimary.includes(".")) {
-          if (newState.displayPrimary === "0.") {
+          if (
+            newState.displayPrimary === "0." ||
+            newState.displayPrimary.slice(-1) === "."
+          ) {
             newState.showDecimal = true;
           }
           return newState;
@@ -41,9 +44,6 @@ const keyboardReducer = (state = initialState, action) => {
         return newState;
       }
 
-      if (action.value === "0" && newState.displayPrimary.includes(".")) {
-        newState.showDecimal = true;
-      }
       newState.displayPrimary += action.value;
       newState.emptyDisplayPrim = false;
       return newState;
@@ -54,7 +54,7 @@ const keyboardReducer = (state = initialState, action) => {
     case DEL_INPUT:
       if (newState.isResultExecuted) {
         newState.displaySecondary = "0";
-        newState.displaySecVisibility = false;
+        newState.showDisplaySec = false;
         newState.operation = "";
         newState.isResultExecuted = false;
         return newState;
@@ -62,8 +62,12 @@ const keyboardReducer = (state = initialState, action) => {
       if (/[.]0/g.test(newState.displayPrimary)) {
         newState.showDecimal = true;
       }
+      console.log(newState.displayPrimary.slice(-2, -1));
       if (newState.displayPrimary.slice(-1) === ".") {
         newState.showDecimal = false;
+      }
+      if (newState.displayPrimary.slice(-2, -1) === ".") {
+        newState.showDecimal = true;
       }
       let slicedString = newState.displayPrimary.slice(
         0,
@@ -93,20 +97,20 @@ const keyboardReducer = (state = initialState, action) => {
       }
 
       switch (action.value) {
-        case "addition":
+        case "add":
           newState.displaySecondary = newState.displayPrimary + " +";
           break;
-        case "subtraction":
+        case "subtract":
           newState.displaySecondary = newState.displayPrimary + " -";
           break;
-        case "multiplication":
+        case "multiply":
           newState.displaySecondary = newState.displayPrimary + " x";
           break;
-        case "division":
+        case "divide":
           newState.displaySecondary =
             newState.displayPrimary + " " + String.fromCharCode(247);
       }
-      newState.displaySecVisibility = true;
+      newState.showDisplaySec = true;
       newState.emptyDisplayPrim = true;
       return newState;
 
@@ -126,16 +130,16 @@ const keyboardReducer = (state = initialState, action) => {
       }
 
       switch (newState.operation) {
-        case "addition":
+        case "add":
           return operation(newState, "+", dispSecNum);
 
-        case "subtraction":
+        case "subtract":
           return operation(newState, "-", dispSecNum);
 
-        case "multiplication":
+        case "multiply":
           return operation(newState, "x", dispSecNum);
 
-        case "division":
+        case "divide":
           return operation(newState, "/", dispSecNum);
 
         default:
@@ -143,13 +147,10 @@ const keyboardReducer = (state = initialState, action) => {
       }
 
     case PCT_INPUT:
-      if (
-        newState.displayPrimary != "0" &&
-        newState.displaySecVisibility === false
-      ) {
+      if (newState.displayPrimary != "0" && newState.showDisplaySec === false) {
         newState.displayPrimary = "0";
         newState.displaySecondary = "0";
-        newState.displaySecVisibility = true;
+        newState.showDisplaySec = true;
         return newState;
       }
 
@@ -161,19 +162,19 @@ const keyboardReducer = (state = initialState, action) => {
       newState.isPercentExecuted = true;
 
       switch (newState.operation) {
-        case "addition":
+        case "add":
           newState.displaySecondary = firstNum + " + " + pct;
           return newState;
 
-        case "subtraction":
+        case "subtract":
           newState.displaySecondary = firstNum + " - " + pct;
           return newState;
 
-        case "multiplication":
+        case "multiply":
           newState.displaySecondary = firstNum + " * " + pct;
           return newState;
 
-        case "division":
+        case "divide":
           newState.displaySecondary = firstNum + " / " + pct;
           return newState;
         default:
