@@ -4,6 +4,7 @@ import {
   EQL_INPUT,
   NUM_INPUT,
   OPS_INPUT,
+  PCT_INPUT,
 } from "./actionTypes";
 
 export const clickNumber = (eventValue) => {
@@ -29,6 +30,12 @@ export const clickOps = (eventValue) => {
   return {
     type: OPS_INPUT,
     value: eventValue,
+  };
+};
+
+export const clickPct = () => {
+  return {
+    type: PCT_INPUT,
   };
 };
 

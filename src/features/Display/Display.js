@@ -13,10 +13,10 @@ function Display() {
   );
 
   let displaySecClass = "displaySecondary";
-  const displaySecVisibility = useSelector(
-    (state) => state.keyboardReducer.displaySecVisibility
+  const showDisplaySec = useSelector(
+    (state) => state.keyboardReducer.showDisplaySec
   );
-  if (displaySecVisibility) {
+  if (showDisplaySec) {
     displaySecClass += " visible";
   }
 
@@ -36,16 +36,29 @@ function Display() {
     }
   }
 
-  const formatedNumber = new Intl.NumberFormat(undefined, {
+  let displayPrimary = "";
+  let displayPrimClass = "displayPrimary";
+
+  const formattedDisplayPrim = new Intl.NumberFormat(undefined, {
     maximumFractionDigits: 16,
     minimumIntegerDigits: 1,
   }).format(displayPrimVal);
 
+  if (displayPrimVal.length <= 18 && !displayPrimVal.includes("e")) {
+    displayPrimary = formattedDisplayPrim;
+  } else {
+    displayPrimary = Number(displayPrimVal).toExponential();
+
+    if (displayPrimary.length >= 16) {
+      displayPrimClass += " smallerFont";
+    }
+  }
+
   return (
     <div className="Display" id="display">
       <div className={displaySecClass}>{displaySecVal}</div>
-      <div className="displayPrimary">
-        {formatedNumber}
+      <div className={displayPrimClass}>
+        {displayPrimary}
         <span className={showDecimalClass}>.</span>
         <span>{trailingZeros}</span>
       </div>

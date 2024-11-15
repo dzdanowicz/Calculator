@@ -17,6 +17,7 @@ import {
   EQL_INPUT,
   NUM_INPUT,
   OPS_INPUT,
+  PCT_INPUT,
 } from "../actionTypes";
 import {
   clickClear,
@@ -24,6 +25,7 @@ import {
   clickEql,
   clickNumber,
   clickOps,
+  clickPct,
 } from "../actions";
 import { useDispatch } from "react-redux";
 
@@ -44,6 +46,9 @@ function Keyboard() {
       case OPS_INPUT:
         dispatchEvent(clickOps(dispatchValue));
         break;
+      case PCT_INPUT:
+        dispatchEvent(clickPct());
+        break;
       case EQL_INPUT:
         dispatchEvent(clickEql());
         break;
@@ -54,11 +59,11 @@ function Keyboard() {
 
   return (
     <div className="keyboard-container">
-      <div className="btn">
+      <div className="btn" onClick={() => dispatch(PCT_INPUT)}>
         <FontAwesomeIcon icon={faPercent} />
       </div>
       <div className="btn" id="clear" onClick={() => dispatch(CLR_INPUT)}>
-        CE
+        C
       </div>
       <div className="btn" onClick={() => dispatch(DEL_INPUT)}>
         <FontAwesomeIcon icon={faDeleteLeft} />
@@ -98,7 +103,7 @@ function Keyboard() {
       <div
         className="btn"
         id="subtract"
-        onClick={() => dispatch(OPS_INPUT, "subtraction")}
+        onClick={() => dispatch(OPS_INPUT, "subtract")}
       >
         <FontAwesomeIcon icon={faMinus} />
       </div>
@@ -111,11 +116,7 @@ function Keyboard() {
       <div className="btn" id="three" onClick={() => dispatch(NUM_INPUT, "3")}>
         3
       </div>
-      <div
-        className="btn"
-        id="add"
-        onClick={() => dispatch(OPS_INPUT, "addition")}
-      >
+      <div className="btn" id="add" onClick={() => dispatch(OPS_INPUT, "add")}>
         <FontAwesomeIcon icon={faPlus} />
       </div>
       <div className="btn">

@@ -4,9 +4,10 @@ const initialState = {
   operation: "",
   firstNum: 0,
   secondNum: 0,
-  displaySecVisibility: false,
+  showDisplaySec: false,
   emptyDisplayPrim: false,
   isResultExecuted: false,
+  isPercentExecuted: false,
   showDecimal: false,
 };
 
